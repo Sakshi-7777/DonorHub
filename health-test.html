@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Health Test</title>
+    <link rel="stylesheet" href="styles-main.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item active">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Health Tip</h4>
+                    <p>Regular health check-ups help prevent diseases</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>Health Assessment</h1>
+                    <p class="topbar-subtitle">Get your personalized health risk score</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon">🔔</button>
+                    <button class="btn-icon">⚙️</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Tabs Navigation -->
+                <div class="tabs-navigation">
+                    <button class="tab-btn active" data-tab="test">📋 Take Test</button>
+                    <button class="tab-btn" data-tab="results">📊 Results</button>
+                    <button class="tab-btn" data-tab="tracking">📈 Tracking</button>
+                    <button class="tab-btn" data-tab="recommendations">💡 Recommendations</button>
+                </div>
+
+                <!-- Test Tab -->
+                <div class="tab-content active" id="test-tab">
+                    <div class="content-card">
+                        <h2>Health Assessment Test</h2>
+                        <p style="color: #666; margin-bottom: 20px;">Answer 8 quick questions to get your health risk assessment</p>
+                        
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <p id="progress-text" class="progress-text">Question 1 of 8</p>
+
+                        <form id="health-test-form" class="test-form">
+                            <!-- Questions 1-8 -->
+                            <div class="test-question active" data-question="1">
+                                <h3>What is your age group?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="age" value="18-25">
+                                        <span class="option-text">18-25 years</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="age" value="26-40">
+                                        <span class="option-text">26-40 years</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="age" value="41-60">
+                                        <span class="option-text">41-60 years</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="age" value="60+">
+                                        <span class="option-text">60+ years</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="2">
+                                <h3>How would you describe your weight?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="weight" value="underweight">
+                                        <span class="option-text">Underweight</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="weight" value="normal">
+                                        <span class="option-text">Normal</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="weight" value="overweight">
+                                        <span class="option-text">Overweight</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="weight" value="obese">
+                                        <span class="option-text">Obese</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="3">
+                                <h3>Do you have any chronic symptoms?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="symptoms" value="none">
+                                        <span class="option-text">None</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="symptoms" value="mild">
+                                        <span class="option-text">Mild (occasional)</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="symptoms" value="moderate">
+                                        <span class="option-text">Moderate (frequent)</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="symptoms" value="severe">
+                                        <span class="option-text">Severe (persistent)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="4">
+                                <h3>Have you had fever in the last 30 days?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="fever" value="no">
+                                        <span class="option-text">No</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="fever" value="yes-mild">
+                                        <span class="option-text">Yes, mild (< 100°F)</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="fever" value="yes-high">
+                                        <span class="option-text">Yes, high (> 100°F)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="5">
+                                <h3>Do you have a persistent cough?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="cough" value="no">
+                                        <span class="option-text">No</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="cough" value="yes-mild">
+                                        <span class="option-text">Yes, mild</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="cough" value="yes-severe">
+                                        <span class="option-text">Yes, severe</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="6">
+                                <h3>Do you experience dizziness or vertigo?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="dizziness" value="no">
+                                        <span class="option-text">No</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="dizziness" value="occasionally">
+                                        <span class="option-text">Occasionally</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="dizziness" value="frequently">
+                                        <span class="option-text">Frequently</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="7">
+                                <h3>Have you had any surgery in the last 6 months?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="surgery" value="no">
+                                        <span class="option-text">No</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="surgery" value="yes-minor">
+                                        <span class="option-text">Yes, minor</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="surgery" value="yes-major">
+                                        <span class="option-text">Yes, major</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-question" data-question="8">
+                                <h3>Do you have blood pressure issues?</h3>
+                                <div class="question-options">
+                                    <label class="option-label">
+                                        <input type="radio" name="bp" value="no">
+                                        <span class="option-text">No</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="bp" value="yes-controlled">
+                                        <span class="option-text">Yes, but controlled</span>
+                                    </label>
+                                    <label class="option-label">
+                                        <input type="radio" name="bp" value="yes-uncontrolled">
+                                        <span class="option-text">Yes, uncontrolled</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="test-actions">
+                                <button type="button" id="prev-btn" class="btn btn-outline" style="display:none;">← Previous</button>
+                                <button type="button" id="next-btn" class="btn btn-primary">Next →</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary" style="display:none;">Get Results</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Tab -->
+                <div class="tab-content" id="results-tab">
+                    <div class="content-card">
+                        <h2>Your Results</h2>
+                        <div id="results-container"></div>
+                    </div>
+                </div>
+
+                <!-- Tracking Tab -->
+                <div class="tab-content" id="tracking-tab">
+                    <div class="content-card">
+                        <h2>Health Tracking</h2>
+                        <div id="tracking-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Recommendations Tab -->
+                <div class="tab-content" id="recommendations-tab">
+                    <div class="content-card">
+                        <h2>Personalized Recommendations</h2>
+                        <div id="recommendations-list"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="health-test.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('current-user');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Tab switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabName = btn.dataset.tab;
+                    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    const tabElement = document.getElementById(tabName + '-tab');
+                    if (tabElement) {
+                        tabElement.classList.add('active');
+                        btn.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('current-user');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthHub - Login</title>
+    <script>
+        // Check if user is logged in
+        const currentUser = localStorage.getItem('current-user');
+        if (currentUser) {
+            window.location.href = 'home.html';
+        } else {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Health & Blood Donation Platform</h1>
+            <p>Your comprehensive health companion - offline, secure, and always available</p>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+            <button class="nav-btn" data-section="donor-register">Register Donor</button>
+            <button class="nav-btn" data-section="donor-search">Find Donors</button>
+            <button class="nav-btn" data-section="medicine">Medicine Search</button>
+            <button class="nav-btn" data-section="health-test">Health Test</button>
+            <button class="nav-btn" data-section="chatbot">AI Assistant</button>
+        </nav>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="section active">
+            <div class="card">
+                <h2>📊 Dashboard</h2>
+                <p style="margin-bottom: 20px; color: #b0b0b0;">Welcome to your health companion platform. Use the navigation above to access different features.</p>
+                
+                <div class="grid">
+                    <div class="card" style="background: rgba(255, 107, 107, 0.1); border-color: rgba(255, 107, 107, 0.3);">
+                        <h3>🩸 Blood Donors</h3>
+                        <p id="donor-count" style="font-size: 2em; color: #ff6b6b; font-weight: bold;">0</p>
+                        <p style="color: #b0b0b0;">Registered donors in system</p>
+                    </div>
+                    <div class="card" style="background: rgba(255, 165, 2, 0.1); border-color: rgba(255, 165, 2, 0.3);">
+                        <h3>💊 Medicines</h3>
+                        <p style="font-size: 2em; color: #ffa502; font-weight: bold;">50+</p>
+                        <p style="color: #b0b0b0;">Available in database</p>
+                    </div>
+                    <div class="card" style="background: rgba(76, 175, 80, 0.1); border-color: rgba(76, 175, 80, 0.3);">
+                        <h3>✅ Health Tests</h3>
+                        <p id="test-count" style="font-size: 2em; color: #4caf50; font-weight: bold;">0</p>
+                        <p style="color: #b0b0b0;">Tests completed</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Quick Stats</h3>
+                <div id="dashboard-stats" style="color: #d0d0d0; line-height: 1.8;">
+                    <p>📍 Your location: <span id="user-location">Not detected</span></p>
+                    <p>🔔 Recent notifications: <span id="notification-count">0</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DONOR REGISTRATION SECTION -->
+        <section id="donor-register" class="section">
+            <div class="card">
+                <h2>🩸 Register as Blood Donor</h2>
+                <div id="register-message"></div>
+                
+                <form id="donor-form">
+                    <div class="form-group">
+                        <label for="donor-name">Full Name *</label>
+                        <input type="text" id="donor-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-phone">Phone Number *</label>
+                        <input type="tel" id="donor-phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-blood-type">Blood Type *</label>
+                        <select id="donor-blood-type" required>
+                            <option value="">Select Blood Type</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-last-donation">Last Donation Date</label>
+                        <input type="date" id="donor-last-donation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-count">Total Donations</label>
+                        <input type="number" id="donor-count-input" value="0" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>📍 Location (Auto-detect or Manual)</label>
+                        <button type="button" id="detect-location-btn" style="margin-bottom: 10px;">Detect My Location</button>
+                        <div id="location-status" style="color: #b0b0b0; margin-bottom: 10px; font-size: 0.9em;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-latitude">Latitude</label>
+                        <input type="number" id="donor-latitude" step="0.0001" placeholder="e.g., 28.7041">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donor-longitude">Longitude</label>
+                        <input type="number" id="donor-longitude" step="0.0001" placeholder="e.g., 77.1025">
+                    </div>
+
+                    <button type="submit">Register as Donor</button>
+                    <button type="reset">Clear Form</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- DONOR SEARCH SECTION -->
+        <section id="donor-search" class="section">
+            <div class="card">
+                <h2>🔍 Find Blood Donors</h2>
+                
+                <div class="form-group">
+                    <label for="search-blood-type">Blood Type *</label>
+                    <select id="search-blood-type" required>
+                        <option value="">Select Blood Type</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="search-radius">Search Radius (km) *</label>
+                    <input type="number" id="search-radius" value="10" min="1" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label>📍 Your Location</label>
+                    <button type="button" id="search-detect-location-btn" style="margin-bottom: 10px;">Detect My Location</button>
+                    <div id="search-location-status" style="color: #b0b0b0; margin-bottom: 10px; font-size: 0.9em;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="search-latitude">Your Latitude</label>
+                    <input type="number" id="search-latitude" step="0.0001" placeholder="e.g., 28.7041">
+                </div>
+
+                <div class="form-group">
+                    <label for="search-longitude">Your Longitude</label>
+                    <input type="number" id="search-longitude" step="0.0001" placeholder="e.g., 77.1025">
+                </div>
+
+                <button id="search-donors-btn">Search Donors</button>
+
+                <div id="search-results" style="margin-top: 30px;"></div>
+            </div>
+        </section>
+
+        <!-- MEDICINE SEARCH SECTION -->
+        <section id="medicine" class="section">
+            <div class="card">
+                <h2>💊 Medicine Search</h2>
+                
+                <div class="form-group">
+                    <label for="medicine-search">Search Medicine by Name or Use</label>
+                    <input type="text" id="medicine-search" placeholder="e.g., Aspirin, Fever, Cough...">
+                </div>
+
+                <button id="search-medicine-btn">Search</button>
+                <button id="online-search-btn" style="background: rgba(33, 150, 243, 0.6);">Search Online (Optional)</button>
+
+                <div id="medicine-results" style="margin-top: 30px;"></div>
+            </div>
+        </section>
+
+        <!-- HEALTH TEST SECTION -->
+        <section id="health-test" class="section">
+            <div class="card">
+                <h2>🏥 Health Assessment Test</h2>
+                <p style="color: #b0b0b0; margin-bottom: 20px;">Answer the following questions to get a health risk assessment.</p>
+
+                <form id="health-test-form">
+                    <div class="test-question">
+                        <h4>1. What is your age group?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="age" value="18-25" id="age1">
+                            <label for="age1">18-25 years</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="age" value="26-40" id="age2">
+                            <label for="age2">26-40 years</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="age" value="41-60" id="age3">
+                            <label for="age3">41-60 years</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="age" value="60+" id="age4">
+                            <label for="age4">60+ years</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>2. How would you describe your weight?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="weight" value="underweight" id="weight1">
+                            <label for="weight1">Underweight</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="weight" value="normal" id="weight2">
+                            <label for="weight2">Normal</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="weight" value="overweight" id="weight3">
+                            <label for="weight3">Overweight</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="weight" value="obese" id="weight4">
+                            <label for="weight4">Obese</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>3. Do you have any chronic symptoms?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="symptoms" value="none" id="symptoms1">
+                            <label for="symptoms1">None</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="symptoms" value="mild" id="symptoms2">
+                            <label for="symptoms2">Mild (occasional)</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="symptoms" value="moderate" id="symptoms3">
+                            <label for="symptoms3">Moderate (frequent)</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="symptoms" value="severe" id="symptoms4">
+                            <label for="symptoms4">Severe (persistent)</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>4. Have you had fever in the last 30 days?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="fever" value="no" id="fever1">
+                            <label for="fever1">No</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="fever" value="yes-mild" id="fever2">
+                            <label for="fever2">Yes, mild (< 100°F)</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="fever" value="yes-high" id="fever3">
+                            <label for="fever3">Yes, high (> 100°F)</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>5. Do you have a persistent cough?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="cough" value="no" id="cough1">
+                            <label for="cough1">No</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="cough" value="yes-mild" id="cough2">
+                            <label for="cough2">Yes, mild</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="cough" value="yes-severe" id="cough3">
+                            <label for="cough3">Yes, severe</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>6. Do you experience dizziness or vertigo?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="dizziness" value="no" id="dizziness1">
+                            <label for="dizziness1">No</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="dizziness" value="occasionally" id="dizziness2">
+                            <label for="dizziness2">Occasionally</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="dizziness" value="frequently" id="dizziness3">
+                            <label for="dizziness3">Frequently</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>7. Have you had any surgery in the last 6 months?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="surgery" value="no" id="surgery1">
+                            <label for="surgery1">No</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="surgery" value="yes-minor" id="surgery2">
+                            <label for="surgery2">Yes, minor</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="surgery" value="yes-major" id="surgery3">
+                            <label for="surgery3">Yes, major</label>
+                        </div>
+                    </div>
+
+                    <div class="test-question">
+                        <h4>8. Do you have blood pressure issues?</h4>
+                        <div class="test-option">
+                            <input type="radio" name="bp" value="no" id="bp1">
+                            <label for="bp1">No</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="bp" value="yes-controlled" id="bp2">
+                            <label for="bp2">Yes, but controlled</label>
+                        </div>
+                        <div class="test-option">
+                            <input type="radio" name="bp" value="yes-uncontrolled" id="bp3">
+                            <label for="bp3">Yes, uncontrolled</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" style="margin-top: 20px;">Get Health Assessment</button>
+                </form>
+
+                <div id="health-test-result"></div>
+            </div>
+        </section>
+
+        <!-- CHATBOT SECTION -->
+        <section id="chatbot" class="section">
+            <div class="card">
+                <h2>🤖 AI Health Assistant</h2>
+                
+                <div class="chatbot-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot">
+                            <strong>Assistant:</strong> Hello! I'm your health assistant. I can help you find blood donors, search medicines, provide health tips, and more. How can I help you today?
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Type your message or speak...">
+                        <button id="send-btn">Send</button>
+                        <button id="voice-btn" style="background: rgba(76, 175, 80, 0.6);">🎤 Speak</button>
+                    </div>
+
+                    <div class="quick-buttons">
+                        <button id="quick-donors">Find Donors</button>
+                        <button id="quick-medicine">Medicine Search</button>
+                        <button id="quick-health-test">Health Test</button>
+                        <button id="quick-tips">Health Tips</button>
+                        <button id="quick-blood-groups">Blood Groups Info</button>
+                        <button id="quick-eligibility">Donor Eligibility</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

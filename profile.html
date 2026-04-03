@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Profile</title>
+    <link rel="stylesheet" href="styles-main.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item active">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Profile Tip</h4>
+                    <p>Keep your health information up to date</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>My Profile</h1>
+                    <p class="topbar-subtitle">Manage your personal and health information</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon">🔔</button>
+                    <button class="btn-icon">⚙️</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Tabs Navigation -->
+                <div class="tabs-navigation">
+                    <button class="tab-btn active" data-tab="overview">📊 Overview</button>
+                    <button class="tab-btn" data-tab="personal">👤 Personal Info</button>
+                    <button class="tab-btn" data-tab="health">❤️ Health Profile</button>
+                    <button class="tab-btn" data-tab="donations">🩸 Donations</button>
+                    <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+                </div>
+
+                <!-- Overview Tab -->
+                <div class="tab-content active" id="overview-tab">
+                    <div class="content-card">
+                        <h2>Profile Overview</h2>
+                        <div class="profile-header">
+                            <div class="profile-avatar">👤</div>
+                            <div class="profile-info">
+                                <h1 id="profile-name">User Profile</h1>
+                                <p id="profile-status">Not registered</p>
+                            </div>
+                        </div>
+
+                        <div class="stats-row">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Donations</h3>
+                                    <span class="stat-icon">🩸</span>
+                                </div>
+                                <div class="stat-value" id="stat-donations">0</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Health Tests</h3>
+                                    <span class="stat-icon">📋</span>
+                                </div>
+                                <div class="stat-value" id="stat-health-tests">0</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Medicines Saved</h3>
+                                    <span class="stat-icon">💊</span>
+                                </div>
+                                <div class="stat-value" id="stat-medicines-saved">0</div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Day Streak</h3>
+                                    <span class="stat-icon">🔥</span>
+                                </div>
+                                <div class="stat-value" id="stat-streak">0</div>
+                            </div>
+                        </div>
+
+                        <div class="profile-sections">
+                            <div class="feature-box">
+                                <h3>Recent Activity</h3>
+                                <div id="recent-activity" class="activity-list"></div>
+                            </div>
+
+                            <div class="feature-box">
+                                <h3>Quick Stats</h3>
+                                <div id="quick-stats" class="stats-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Info Tab -->
+                <div class="tab-content" id="personal-tab">
+                    <div class="content-card">
+                        <h2>Personal Information</h2>
+                        <form id="personal-form" class="modern-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="profile-name-input" placeholder="Your full name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="profile-email" placeholder="your@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="profile-phone" placeholder="Your phone number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" id="profile-dob">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select id="profile-gender">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Blood Type</label>
+                                    <select id="profile-blood-type">
+                                        <option value="">Select Blood Type</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="reset" class="btn btn-outline">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Health Profile Tab -->
+                <div class="tab-content" id="health-tab">
+                    <div class="content-card">
+                        <h2>Health Profile</h2>
+                        <form id="health-form" class="modern-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Height (cm)</label>
+                                    <input type="number" id="profile-height" placeholder="170">
+                                </div>
+                                <div class="form-group">
+                                    <label>Weight (kg)</label>
+                                    <input type="number" id="profile-weight" placeholder="70">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Blood Pressure</label>
+                                    <input type="text" id="profile-bp" placeholder="120/80">
+                                </div>
+                                <div class="form-group">
+                                    <label>Allergies</label>
+                                    <input type="text" id="profile-allergies" placeholder="List any allergies">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Medical Conditions</label>
+                                <textarea id="profile-conditions" placeholder="List any chronic conditions" rows="4"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Current Medications</label>
+                                <textarea id="profile-medications" placeholder="List current medications" rows="4"></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Health Info</button>
+                                <button type="reset" class="btn btn-outline">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Donations Tab -->
+                <div class="tab-content" id="donations-tab">
+                    <div class="content-card">
+                        <h2>Donation History</h2>
+                        <div id="donation-history" class="history-list"></div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settings-tab">
+                    <div class="content-card">
+                        <h2>Settings & Preferences</h2>
+
+                        <div class="settings-section">
+                            <h3>Notifications</h3>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notify-donations" checked>
+                                    <span>Donation reminders</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notify-health" checked>
+                                    <span>Health tips</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notify-urgent" checked>
+                                    <span>Urgent alerts</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Privacy</h3>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="privacy-profile" checked>
+                                    <span>Make profile visible to donors</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="privacy-data">
+                                    <span>Allow data analytics</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Data Management</h3>
+                            <button class="btn btn-secondary" onclick="exportData()">📥 Export My Data</button>
+                            <button class="btn btn-outline" onclick="clearAllData()">🗑️ Clear All Data</button>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>About</h3>
+                            <p>HealthHub v1.0</p>
+                            <p>Built with ❤️ for your health</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="profile.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('current-user');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Tab switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabName = btn.dataset.tab;
+                    
+                    // Remove active from all tabs and buttons
+                    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active to selected tab and button
+                    const tabElement = document.getElementById(tabName + '-tab');
+                    if (tabElement) {
+                        tabElement.classList.add('active');
+                        btn.classList.add('active');
+                    }
+                });
+            });
+
+            // Auto-open settings tab if coming from settings icon
+            if (window.location.hash === '#settings') {
+                const settingsBtn = document.querySelector('[data-tab="settings"]');
+                if (settingsBtn) {
+                    settingsBtn.click();
+                }
+            }
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('current-user');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

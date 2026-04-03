@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Dashboard</title>
+    <link rel="stylesheet" href="styles-main.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item active">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+                <a href="social.html" class="menu-item">
+                    <span class="menu-icon">👥</span>
+                    <span>Social Feed</span>
+                </a>
+                <a href="appointments.html" class="menu-item">
+                    <span class="menu-icon">📅</span>
+                    <span>Appointments</span>
+                </a>
+                <a href="hospitals.html" class="menu-item">
+                    <span class="menu-icon">🏥</span>
+                    <span>Hospitals</span>
+                </a>
+                <a href="emergency.html" class="menu-item">
+                    <span class="menu-icon">🚨</span>
+                    <span>Emergency</span>
+                </a>
+                <a href="rewards.html" class="menu-item">
+                    <span class="menu-icon">🏆</span>
+                    <span>Rewards</span>
+                </a>
+                <a href="settings.html" class="menu-item">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Health Tip</h4>
+                    <p>Drink 8 glasses of water daily for better health</p>
+                </div>
+                <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 Dark</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>Overview</h1>
+                    <p class="topbar-subtitle" id="welcome-message">Welcome back! Here's your health summary</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon" title="Notifications">🔔</button>
+                    <button class="btn-icon" onclick="goToSettings()" title="Settings">⚙️</button>
+                    <button class="btn-primary" onclick="location.href='donors.html'">+ Register Donor</button>
+                    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Stats Cards Row -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Blood Donors</h3>
+                            <span class="stat-icon">🩸</span>
+                        </div>
+                        <div class="stat-value" id="stat-donors">0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change positive">↑ 12% this month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Medicines</h3>
+                            <span class="stat-icon">💊</span>
+                        </div>
+                        <div class="stat-value">50+</div>
+                        <div class="stat-footer">
+                            <span class="stat-change">In database</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Health Tests</h3>
+                            <span class="stat-icon">📋</span>
+                        </div>
+                        <div class="stat-value" id="stat-tests">0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change">Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Availability</h3>
+                            <span class="stat-icon">✅</span>
+                        </div>
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-footer">
+                            <span class="stat-change">Always online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Donor Trends</h3>
+                            <span class="card-menu">⋮</span>
+                        </div>
+                        <div class="chart-placeholder">
+                            <div class="mini-chart">
+                                <div class="bar" style="height: 60%;"></div>
+                                <div class="bar" style="height: 75%;"></div>
+                                <div class="bar" style="height: 85%;"></div>
+                                <div class="bar" style="height: 70%;"></div>
+                                <div class="bar" style="height: 90%;"></div>
+                                <div class="bar" style="height: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Blood Type Distribution</h3>
+                            <span class="card-menu">⋮</span>
+                        </div>
+                        <div class="blood-types">
+                            <div class="blood-type-item">
+                                <span class="blood-type-name">O+</span>
+                                <div class="blood-type-bar">
+                                    <div class="blood-type-fill" style="width: 35%;"></div>
+                                </div>
+                                <span class="blood-type-count">35%</span>
+                            </div>
+                            <div class="blood-type-item">
+                                <span class="blood-type-name">A+</span>
+                                <div class="blood-type-bar">
+                                    <div class="blood-type-fill" style="width: 28%;"></div>
+                                </div>
+                                <span class="blood-type-count">28%</span>
+                            </div>
+                            <div class="blood-type-item">
+                                <span class="blood-type-name">B+</span>
+                                <div class="blood-type-bar">
+                                    <div class="blood-type-fill" style="width: 22%;"></div>
+                                </div>
+                                <span class="blood-type-count">22%</span>
+                            </div>
+                            <div class="blood-type-item">
+                                <span class="blood-type-name">AB+</span>
+                                <div class="blood-type-bar">
+                                    <div class="blood-type-fill" style="width: 15%;"></div>
+                                </div>
+                                <span class="blood-type-count">15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Row -->
+                <div class="features-row">
+                    <div class="feature-box">
+                        <div class="feature-header">
+                            <h3>🔒 Privacy First</h3>
+                        </div>
+                        <p>All data stored locally on your device. No cloud sync, no tracking.</p>
+                        <a href="#" class="feature-link">Learn more →</a>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-header">
+                            <h3>📱 Works Offline</h3>
+                        </div>
+                        <p>Full functionality without internet connection. Perfect for remote areas.</p>
+                        <a href="#" class="feature-link">Learn more →</a>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-header">
+                            <h3>⚡ Lightning Fast</h3>
+                        </div>
+                        <p>Advanced algorithms for instant search results and recommendations.</p>
+                        <a href="#" class="feature-link">Learn more →</a>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-header">
+                            <h3>🤖 AI Assistant</h3>
+                        </div>
+                        <p>Smart chatbot with voice support for instant health guidance.</p>
+                        <a href="chatbot.html" class="feature-link">Try now →</a>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions-section">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <a href="donors.html" class="quick-action-btn">
+                            <span class="qa-icon">🩸</span>
+                            <span class="qa-text">Find Donors</span>
+                        </a>
+                        <a href="medicines.html" class="quick-action-btn">
+                            <span class="qa-icon">💊</span>
+                            <span class="qa-text">Search Medicines</span>
+                        </a>
+                        <a href="health-test.html" class="quick-action-btn">
+                            <span class="qa-icon">📋</span>
+                            <span class="qa-text">Take Test</span>
+                        </a>
+                        <a href="chatbot.html" class="quick-action-btn">
+                            <span class="qa-icon">🤖</span>
+                            <span class="qa-text">Chat Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="home.js"></script>
+    <script>
+        // Theme functions
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            updateThemeButton();
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton();
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'light') {
+                root.classList.add('light-theme');
+            } else {
+                root.classList.remove('light-theme');
+            }
+        }
+
+        function updateThemeButton() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            const btn = document.querySelector('.theme-toggle-btn');
+            if (btn) {
+                btn.innerHTML = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            }
+        }
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            
+            const currentUser = localStorage.getItem('current-user');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Display user name in welcome message
+            const user = JSON.parse(currentUser);
+            const welcomeMsg = document.getElementById('welcome-message');
+            if (welcomeMsg) {
+                welcomeMsg.textContent = `Welcome back, ${user.name}! Here's your health summary`;
+            }
+        });
+
+        // Go to settings
+        function goToSettings() {
+            window.location.href = 'settings.html';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('current-user');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

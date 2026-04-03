@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Settings</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <style>
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .setting-option {
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .setting-option:hover {
+            border-color: var(--primary);
+            background: var(--bg-hover);
+        }
+
+        .setting-option.active {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .setting-option p {
+            margin: 0;
+        }
+
+        .setting-option .emoji {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .setting-option .label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            color: var(--text-primary);
+            margin: 0;
+            flex: 1;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-export {
+            background: var(--info);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .btn-export:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-clear {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .btn-clear:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .about-section {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .about-section p {
+            margin: 10px 0;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+                <a href="settings.html" class="menu-item active">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Tip</h4>
+                    <p>Customize your experience here</p>
+                </div>
+                <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 Dark</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>Settings & Preferences</h1>
+                    <p class="topbar-subtitle">Customize your experience</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon" title="Notifications">🔔</button>
+                    <button class="btn-icon" onclick="goToSettings()" title="Settings">⚙️</button>
+                    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+                </div>
+            </div>
+
+            <!-- Theme Settings -->
+            <div class="card">
+                <h3 class="section-title">🎨 Theme Settings</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Choose your preferred theme</p>
+                
+                <div class="settings-grid">
+                    <button onclick="setTheme('dark')" class="setting-option" id="theme-dark">
+                        <div class="emoji">🌙</div>
+                        <div class="label">Dark Mode</div>
+                    </button>
+                    <button onclick="setTheme('light')" class="setting-option" id="theme-light">
+                        <div class="emoji">☀️</div>
+                        <div class="label">Light Mode</div>
+                    </button>
+                </div>
+                <p id="theme-status" style="color: var(--text-secondary); margin-top: 15px; text-align: center;"></p>
+            </div>
+
+            <!-- Language Settings -->
+            <div class="card">
+                <h3 class="section-title">🌐 Language Settings</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Select your preferred language</p>
+                
+                <div class="settings-grid">
+                    <button onclick="setLanguage('en')" class="setting-option" id="lang-en">
+                        <div class="emoji">🇬🇧</div>
+                        <div class="label">English</div>
+                    </button>
+                    <button onclick="setLanguage('hi')" class="setting-option" id="lang-hi">
+                        <div class="emoji">🇮🇳</div>
+                        <div class="label">हिंदी</div>
+                    </button>
+                </div>
+                <p id="language-status" style="color: var(--text-secondary); margin-top: 15px; text-align: center;"></p>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="card">
+                <h3 class="section-title">🔔 Notification Settings</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Manage your notification preferences</p>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notify-donor" checked>
+                        <label for="notify-donor">🩸 Donor Requests</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notify-appointment" checked>
+                        <label for="notify-appointment">📅 Appointment Reminders</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notify-emergency" checked>
+                        <label for="notify-emergency">🚨 Emergency Alerts</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="notify-rewards" checked>
+                        <label for="notify-rewards">🏆 Rewards & Achievements</label>
+                    </div>
+                </div>
+                
+                <button onclick="saveNotifications()" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 12px;">💾 Save Preferences</button>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="card">
+                <h3 class="section-title">🔐 Privacy Settings</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Control your data and privacy</p>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="privacy-profile" checked>
+                        <label for="privacy-profile">👤 Make profile visible to donors</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="privacy-location" checked>
+                        <label for="privacy-location">📍 Share location with donors</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="privacy-history">
+                        <label for="privacy-history">📊 Allow donation history tracking</label>
+                    </div>
+                </div>
+                
+                <button onclick="savePrivacy()" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 12px;">💾 Save Privacy Settings</button>
+            </div>
+
+            <!-- Data Management -->
+            <div class="card">
+                <h3 class="section-title">📊 Data Management</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Manage your personal data</p>
+                
+                <div class="button-group">
+                    <button onclick="exportData()" class="btn-export">📥 Export My Data</button>
+                    <button onclick="clearData()" class="btn-clear">🗑️ Clear All Data</button>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="card">
+                <h3 class="section-title">ℹ️ About Aura Healthcare</h3>
+                <div class="about-section">
+                    <p><strong>Aura Healthcare v1.0</strong></p>
+                    <p>Premium Health & Blood Donation Platform</p>
+                    <p style="color: var(--text-secondary); margin-top: 15px;">Built with ❤️ for health and community</p>
+                    <p style="color: var(--text-muted); font-size: 0.9em; margin-top: 15px;">© 2025 Aura Healthcare. All rights reserved.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+        // ============================================
+        // THEME MANAGEMENT
+        // ============================================
+        
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            updateThemeButton();
+            updateThemeOptions();
+            updateThemeStatus();
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'light') {
+                root.classList.add('light-theme');
+            } else {
+                root.classList.remove('light-theme');
+            }
+        }
+
+        function updateThemeButton() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            const btn = document.querySelector('.theme-toggle-btn');
+            if (btn) {
+                btn.innerHTML = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            }
+        }
+
+        function updateThemeOptions() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            const darkBtn = document.getElementById('theme-dark');
+            const lightBtn = document.getElementById('theme-light');
+            
+            if (darkBtn) {
+                darkBtn.classList.toggle('active', theme === 'dark');
+            }
+            if (lightBtn) {
+                lightBtn.classList.toggle('active', theme === 'light');
+            }
+        }
+
+        function updateThemeStatus() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            const status = document.getElementById('theme-status');
+            if (status) {
+                status.textContent = `✅ Current theme: ${theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}`;
+            }
+        }
+
+        function setTheme(theme) {
+            applyTheme(theme);
+            localStorage.setItem('theme', theme);
+            updateThemeButton();
+            updateThemeOptions();
+            updateThemeStatus();
+        }
+
+        // ============================================
+        // LANGUAGE MANAGEMENT
+        // ============================================
+
+        function initLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            updateLanguageOptions();
+            updateLanguageStatus();
+        }
+
+        function setLanguage(lang) {
+            localStorage.setItem('language', lang);
+            updateLanguageOptions();
+            updateLanguageStatus();
+        }
+
+        function updateLanguageOptions() {
+            const lang = localStorage.getItem('language') || 'en';
+            const enBtn = document.getElementById('lang-en');
+            const hiBtn = document.getElementById('lang-hi');
+            
+            if (enBtn) {
+                enBtn.classList.toggle('active', lang === 'en');
+            }
+            if (hiBtn) {
+                hiBtn.classList.toggle('active', lang === 'hi');
+            }
+        }
+
+        function updateLanguageStatus() {
+            const lang = localStorage.getItem('language') || 'en';
+            const status = document.getElementById('language-status');
+            if (status) {
+                status.textContent = `✅ Current language: ${lang === 'en' ? '🇬🇧 English' : '🇮🇳 हिंदी'}`;
+            }
+        }
+
+        // ============================================
+        // NOTIFICATION SETTINGS
+        // ============================================
+
+        function saveNotifications() {
+            const settings = {
+                donor: document.getElementById('notify-donor').checked,
+                appointment: document.getElementById('notify-appointment').checked,
+                emergency: document.getElementById('notify-emergency').checked,
+                rewards: document.getElementById('notify-rewards').checked
+            };
+            localStorage.setItem('notification-settings', JSON.stringify(settings));
+            showMessage('Notification settings saved successfully! ✅');
+        }
+
+        // ============================================
+        // PRIVACY SETTINGS
+        // ============================================
+
+        function savePrivacy() {
+            const settings = {
+                profile: document.getElementById('privacy-profile').checked,
+                location: document.getElementById('privacy-location').checked,
+                history: document.getElementById('privacy-history').checked
+            };
+            localStorage.setItem('privacy-settings', JSON.stringify(settings));
+            showMessage('Privacy settings saved successfully! ✅');
+        }
+
+        // ============================================
+        // DATA MANAGEMENT
+        // ============================================
+
+        function exportData() {
+            const data = {
+                donors: JSON.parse(localStorage.getItem('donors')) || [],
+                appointments: JSON.parse(localStorage.getItem('appointments')) || [],
+                rewards: JSON.parse(localStorage.getItem('rewards')) || {},
+                socialFeed: JSON.parse(localStorage.getItem('social-feed')) || [],
+                emergencyAlerts: JSON.parse(localStorage.getItem('emergency-alerts')) || [],
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `aura-healthcare-data-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showMessage('Data exported successfully! 📥');
+        }
+
+        function clearData() {
+            if (confirm('⚠️ WARNING: This will delete ALL your data permanently. Are you absolutely sure?')) {
+                if (confirm('🚨 This action cannot be undone. Click OK to confirm deletion.')) {
+                    localStorage.clear();
+                    showMessage('All data cleared. Redirecting to login...');
+                    setTimeout(() => {
+                        location.href = 'login.html';
+                    }, 1500);
+                }
+            }
+        }
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        function showMessage(message) {
+            alert(message);
+        }
+
+        function goToSettings() {
+            window.location.href = 'settings.html';
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('current-user');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initLanguage();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "healthhub",
+  "version": "1.0.0",
+  "description": "Premium Health & Blood Donation Platform - Offline First, Privacy Focused",
+  "main": "home.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 3000"
+  },
+  "keywords": [
+    "health",
+    "blood-donation",
+    "medicine-search",
+    "health-assessment",
+    "offline-first",
+    "privacy"
+  ],
+  "author": "HealthHub Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/healthhub"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Register</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-header h1 {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+
+        .auth-header p {
+            color: #666;
+            margin: 0;
+            font-size: 0.95em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .password-hint {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .terms {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .terms input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .terms label {
+            cursor: pointer;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .terms a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            display: inline-block;
+            width: 40%;
+            height: 1px;
+            background: #e0e0e0;
+            vertical-align: middle;
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .auth-footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .auth-footer a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .message-box {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .message-box.show {
+            display: block;
+        }
+
+        .success-message {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+        }
+
+        .error-message {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #c62828;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px 20px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.5em;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Header -->
+        <div class="auth-header">
+            <div class="auth-logo">
+                <div class="logo-icon">🌀</div>
+                <div class="logo-text">Aura Healthcare</div>
+            </div>
+            <h1>Create Account</h1>
+            <p>Join Our Health Community</p>
+        </div>
+
+        <!-- Message Box -->
+        <div id="message-box" class="message-box"></div>
+
+        <!-- Register Form -->
+        <form id="register-form">
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-email">Email Address</label>
+                <input type="email" id="reg-email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="Min 6 characters" required>
+                    <div class="password-hint">At least 6 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm password" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="blood-type">Blood Type</label>
+                    <select id="blood-type">
+                        <option value="">Select Blood Type</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="terms">
+                <label>
+                    <input type="checkbox" id="agree-terms" required>
+                    I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-register">Create Account</button>
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">OR</div>
+
+        <!-- Login Link -->
+        <div class="auth-footer">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const phone = document.getElementById('phone').value;
+            const bloodType = document.getElementById('blood-type').value;
+            const agreeTerms = document.getElementById('agree-terms').checked;
+
+            // Validate
+            if (!fullName || !email || !password || !confirmPassword) {
+                showAuthMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAuthMessage('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAuthMessage('Passwords do not match', 'error');
+                return;
+            }
+
+            if (!agreeTerms) {
+                showAuthMessage('Please agree to Terms & Conditions', 'error');
+                return;
+            }
+
+            // Check if email already exists
+            let users = JSON.parse(localStorage.getItem('healthhub-users')) || [];
+            if (users.find(u => u.email === email)) {
+                showAuthMessage('Email already registered. Please login or use a different email', 'error');
+                return;
+            }
+
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                name: fullName,
+                email: email,
+                password: password,
+                phone: phone,
+                bloodType: bloodType,
+                registeredDate: new Date().toISOString()
+            };
+
+            // Save user
+            users.push(newUser);
+            localStorage.setItem('healthhub-users', JSON.stringify(users));
+
+            // Save as current user
+            localStorage.setItem('current-user', JSON.stringify({
+                email: newUser.email,
+                name: newUser.name,
+                loginTime: new Date().toISOString()
+            }));
+
+            // Success message
+            showAuthMessage('Account created successfully! Redirecting...', 'success');
+
+            // Redirect after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        });
+
+        function showAuthMessage(message, type) {
+            const msgBox = document.getElementById('message-box');
+            msgBox.textContent = message;
+            msgBox.className = `message-box show ${type}-message`;
+            
+            if (type === 'error') {
+                setTimeout(() => {
+                    msgBox.classList.remove('show');
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

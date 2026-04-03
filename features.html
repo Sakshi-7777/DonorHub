@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Features</title>
+    <link rel="stylesheet" href="styles-main.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+                <a href="features.html" class="menu-item active">
+                    <span class="menu-icon">✨</span>
+                    <span>Features</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Tip</h4>
+                    <p>Explore all features to maximize your health journey</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>Advanced Features</h1>
+                    <p class="topbar-subtitle">Discover powerful tools to enhance your health experience</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon" title="Notifications">🔔</button>
+                    <button class="btn-icon" onclick="goToSettings()" title="Settings">⚙️</button>
+                    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+                </div>
+            </div>
+
+            <!-- Features Navigation Tabs -->
+            <div class="feature-tabs">
+                <button class="tab-btn active" onclick="switchTab('social')">👥 Social Feed</button>
+                <button class="tab-btn" onclick="switchTab('appointments')">📅 Appointments</button>
+                <button class="tab-btn" onclick="switchTab('hospitals')">🏥 Hospitals</button>
+                <button class="tab-btn" onclick="switchTab('sos')">🚨 Emergency SOS</button>
+                <button class="tab-btn" onclick="switchTab('rewards')">🏆 Rewards</button>
+                <button class="tab-btn" onclick="switchTab('tutorials')">🎥 Tutorials</button>
+                <button class="tab-btn" onclick="switchTab('language')">🌐 Language</button>
+            </div>
+
+            <!-- Social Feed Section -->
+            <section id="social" class="feature-section active">
+                <div class="card">
+                    <h2>👥 Community Health Feed</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Share health tips and inspiring donor stories with the community</p>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3>Share Your Story</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <input type="text" id="social-author" placeholder="Your name" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                            <select id="social-type" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                                <option value="tip">💡 Health Tip</option>
+                                <option value="story">📖 Donor Story</option>
+                            </select>
+                        </div>
+                        <textarea id="social-content" placeholder="Share your health tip or story..." style="width: 100%; height: 100px; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: inherit;"></textarea>
+                        <button onclick="postToFeed()" class="btn btn-primary" style="margin-top: 10px; width: 100%;">📤 Post</button>
+                    </div>
+
+                    <h3>Community Posts</h3>
+                    <div id="social-feed"></div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments" class="feature-section">
+                <div class="card">
+                    <h2>📅 Blood Donation Appointments</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Schedule your blood donation appointments</p>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3>Book New Appointment</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <input type="date" id="appointment-date" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                            <input type="time" id="appointment-time" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                        </div>
+                        <button onclick="scheduleAppointment()" class="btn btn-primary" style="width: 100%;">✅ Schedule Appointment</button>
+                    </div>
+
+                    <h3>Your Appointments</h3>
+                    <div id="appointments"></div>
+                </div>
+            </section>
+
+            <!-- Hospitals Section -->
+            <section id="hospitals" class="feature-section">
+                <div class="card">
+                    <h2>🏥 Nearby Hospitals & Blood Banks</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Find hospitals and blood banks near you</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <button onclick="findHospitals()" class="btn btn-primary" style="width: 100%;">📍 Find Nearby</button>
+                    </div>
+
+                    <div id="hospitals-list"></div>
+                </div>
+            </section>
+
+            <!-- Emergency SOS Section -->
+            <section id="sos" class="feature-section">
+                <div class="card">
+                    <h2>🚨 Emergency Blood Request</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Send emergency alerts to nearby donors</p>
+                    
+                    <button id="sos-button">🚨 SEND EMERGENCY ALERT</button>
+                    <div id="sos-status"></div>
+
+                    <h3 style="margin-top: 30px;">Recent Alerts</h3>
+                    <div id="sos-history"></div>
+                </div>
+            </section>
+
+            <!-- Rewards Section -->
+            <section id="rewards" class="feature-section">
+                <div class="card">
+                    <h2>🏆 Rewards & Gamification</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Earn points and badges for your contributions</p>
+                    
+                    <div id="rewards-dashboard"></div>
+                </div>
+            </section>
+
+            <!-- Video Tutorials Section -->
+            <section id="tutorials" class="feature-section">
+                <div class="card">
+                    <h2>🎥 Video Tutorials</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Learn how to use all features effectively</p>
+                    
+                    <div id="video-tutorials"></div>
+                </div>
+            </section>
+
+            <!-- Language Section -->
+            <section id="language" class="feature-section">
+                <div class="card">
+                    <h2>🌐 Language Settings</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Choose your preferred language</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <button onclick="setLanguage('en')" class="btn btn-primary" style="padding: 15px;">🇬🇧 English</button>
+                        <button onclick="setLanguage('hi')" class="btn btn-primary" style="padding: 15px;">🇮🇳 हिंदी</button>
+                    </div>
+
+                    <div style="margin-top: 30px; padding: 20px; background: var(--bg-card); border-radius: 8px;">
+                        <h3>Current Language</h3>
+                        <p id="current-language" style="color: var(--text-primary); margin-top: 10px;">English</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="features.js"></script>
+    <script>
+        function switchTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.feature-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function postToFeed() {
+            const author = document.getElementById('social-author').value;
+            const content = document.getElementById('social-content').value;
+            const type = document.getElementById('social-type').value;
+            
+            if (!author || !content) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            createSocialPost(author, content, type);
+            document.getElementById('social-author').value = '';
+            document.getElementById('social-content').value = '';
+            alert('✅ Post shared successfully!');
+        }
+
+        function scheduleAppointment() {
+            const date = document.getElementById('appointment-date').value;
+            const time = document.getElementById('appointment-time').value;
+            
+            if (!date || !time) {
+                alert('Please select date and time');
+                return;
+            }
+            
+            bookAppointment(1, date, time);
+            loadAppointments();
+            document.getElementById('appointment-date').value = '';
+            document.getElementById('appointment-time').value = '';
+            alert('✅ Appointment scheduled!');
+        }
+
+        function findHospitals() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const hospitals = findNearbyHospitals(position.coords.latitude, position.coords.longitude, 10);
+                    displayHospitals(hospitals);
+                });
+            } else {
+                alert('Geolocation not supported');
+            }
+        }
+
+        function updateSOSHistory() {
+            const alerts = getEmergencyAlerts();
+            const container = document.getElementById('sos-history');
+            
+            if (alerts.length === 0) {
+                container.innerHTML = '<div class="info-message">No emergency alerts sent yet.</div>';
+                return;
+            }
+            
+            let html = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+            alerts.slice(-5).reverse().forEach(alert => {
+                html += `
+                    <div style="background: var(--bg-card); padding: 15px; border-radius: 8px; border-left: 4px solid var(--danger);">
+                        <p><strong>Blood Type:</strong> ${alert.bloodType}</p>
+                        <p><strong>Status:</strong> <span class="badge badge-${alert.status === 'active' ? 'danger' : 'success'}">${alert.status}</span></p>
+                        <p style="color: var(--text-muted); font-size: 0.9em;">${formatDate(alert.timestamp)}</p>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function updateLanguageDisplay() {
+            const lang = localStorage.getItem('language') || 'en';
+            const langName = lang === 'en' ? 'English' : 'हिंदी (Hindi)';
+            document.getElementById('current-language').textContent = langName;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSOSHistory();
+            updateLanguageDisplay();
+        });
+    </script>
+
+    <style>
+        .feature-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .feature-section {
+            display: none;
+        }
+
+        .feature-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Healthcare - Appointments</title>
+    <link rel="stylesheet" href="styles-main.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-circle">🌀</div>
+                <h2>Aura Healthcare</h2>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="home.html" class="menu-item">
+                    <span class="menu-icon">📝</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="donors.html" class="menu-item">
+                    <span class="menu-icon">🩸</span>
+                    <span>Blood Donors</span>
+                </a>
+                <a href="medicines.html" class="menu-item">
+                    <span class="menu-icon">💊</span>
+                    <span>Medicines</span>
+                </a>
+                <a href="health-test.html" class="menu-item">
+                    <span class="menu-icon">❤️</span>
+                    <span>Health Test</span>
+                </a>
+                <a href="chatbot.html" class="menu-item">
+                    <span class="menu-icon">🧠</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span>Profile</span>
+                </a>
+                <a href="appointments.html" class="menu-item active">
+                    <span class="menu-icon">📅</span>
+                    <span>Appointments</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="health-tip">
+                    <h4>💡 Tip</h4>
+                    <p>Schedule your donation 48 hours in advance</p>
+                </div>
+                <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 Dark</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Top Bar -->
+            <div class="dashboard-topbar">
+                <div class="topbar-left">
+                    <h1>Blood Donation Appointments</h1>
+                    <p class="topbar-subtitle">Schedule and manage your donation appointments</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-icon" title="Notifications">🔔</button>
+                    <button class="btn-icon" onclick="goToSettings()" title="Settings">⚙️</button>
+                    <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+                </div>
+            </div>
+
+            <!-- Book Appointment Section -->
+            <div class="card">
+                <h2>📅 Schedule New Appointment</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label style="color: var(--text-secondary); display: block; margin-bottom: 8px;">Date</label>
+                        <input type="date" id="appointment-date" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                    </div>
+                    <div>
+                        <label style="color: var(--text-secondary); display: block; margin-bottom: 8px;">Time</label>
+                        <input type="time" id="appointment-time" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                    </div>
+                    <div>
+                        <label style="color: var(--text-secondary); display: block; margin-bottom: 8px;">Hospital</label>
+                        <select id="appointment-hospital" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                            <option value="">Select Hospital</option>
+                            <option value="Greater Noida Medical Center">Greater Noida Medical Center</option>
+                            <option value="City Hospital">City Hospital</option>
+                            <option value="Apollo Health Center">Apollo Health Center</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="scheduleAppointment()" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1em;">✅ Schedule Appointment</button>
+            </div>
+
+            <!-- Appointments List -->
+            <div class="card">
+                <h2>📋 Your Appointments</h2>
+                <div id="appointments-list" style="margin-top: 20px;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            updateThemeButton();
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton();
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            if (theme === 'light') {
+                root.classList.add('light-theme');
+            } else {
+                root.classList.remove('light-theme');
+            }
+        }
+
+        function updateThemeButton() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            const btn = document.querySelector('.theme-toggle-btn');
+            if (btn) {
+                btn.innerHTML = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            }
+        }
+
+        function scheduleAppointment() {
+            const date = document.getElementById('appointment-date').value;
+            const time = document.getElementById('appointment-time').value;
+            const hospital = document.getElementById('appointment-hospital').value;
+            
+            if (!date || !time || !hospital) {
+                alert('❌ Please fill in all fields');
+                return;
+            }
+
+            const appointment = {
+                id: Date.now(),
+                date: date,
+                time: time,
+                hospital: hospital,
+                status: 'confirmed',
+                createdAt: new Date().toISOString()
+            };
+            
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            
+            document.getElementById('appointment-date').value = '';
+            document.getElementById('appointment-time').value = '';
+            document.getElementById('appointment-hospital').value = '';
+            
+            loadAppointments();
+            alert('✅ Appointment scheduled successfully!');
+        }
+
+        function loadAppointments() {
+            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            const container = document.getElementById('appointments-list');
+            
+            if (appointments.length === 0) {
+                container.innerHTML = '<div class="info-message">No appointments scheduled yet.</div>';
+                return;
+            }
+            
+            let html = '';
+            appointments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(apt => {
+                html += `
+                    <div class="appointment-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h4 style="margin-bottom: 10px;">📅 ${apt.date} at ${apt.time}</h4>
+                                <p><strong>Hospital:</strong> ${apt.hospital}</p>
+                                <p><strong>Status:</strong> <span class="badge badge-success">${apt.status}</span></p>
+                            </div>
+                            <button onclick="cancelAppointment(${apt.id})" class="btn btn-secondary" style="padding: 8px 15px;">❌ Cancel</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function cancelAppointment(appointmentId) {
+            if (confirm('Cancel this appointment?')) {
+                let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+                appointments = appointments.filter(a => a.id !== appointmentId);
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                loadAppointments();
+                alert('✅ Appointment cancelled');
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            loadAppointments();
+        });
+    </script>
+</body>
+</html>
