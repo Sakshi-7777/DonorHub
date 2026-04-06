@@ -32,3 +32,9 @@ logs/
 # OS
 Thumbs.db
 .DS_Store
+
+# --- React Refactor Changes ---
+# Ignore React-specific temporary files
+.react-cache/
+coverage/
+*.local
